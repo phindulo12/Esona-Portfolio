@@ -5,6 +5,7 @@
 {% block content %}
 <section class="section section-light">
     <div class="container">
+        <a href="{{ url_for('lessons') }}" class="back-link">← Back to lesson portfolio</a>
         <div class="section-header">
             <span class="section-label">Project</span>
             <h2>{{ project.name }}</h2>
@@ -20,7 +21,6 @@
                         <li>{{ highlight }}</li>
                     {% endfor %}
                 </ul>
-                <a href="{{ url_for('lessons') }}" class="btn btn-secondary">Back to lesson portfolio</a>
             </div>
         </div>
     </div>

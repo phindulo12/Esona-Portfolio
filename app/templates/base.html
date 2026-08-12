@@ -19,9 +19,6 @@
                 <a href="{{ url_for('lessons') }}">Lesson portfolio</a>
                 <a href="{{ url_for('home') }}#contact">Contact</a>
             </nav>
-            <button class="theme-toggle" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">
-                <span class="theme-icon">🌙</span>
-            </button>
         </div>
     </header>
 
@@ -47,7 +44,6 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <script src="{{ url_for('static', filename='js/animations.js') }}"></script>
 </body>
 </html>
