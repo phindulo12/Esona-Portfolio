@@ -14,6 +14,46 @@ def get_profile():
             "Assessment & reflective teaching",
             "Learning technology integration"
         ],
+        "impact_stats": [
+            {
+                "number": "200+",
+                "label": "Students Impacted",
+                "description": "Across multiple classrooms and learning settings"
+            },
+            {
+                "number": "50+",
+                "label": "Lesson Plans",
+                "description": "Designed and implemented with data-informed refinement"
+            },
+            {
+                "number": "2+",
+                "label": "Years Experience",
+                "description": "In formal teaching and collaborative instruction"
+            },
+            {
+                "number": "4",
+                "label": "Major Projects",
+                "description": "From curriculum design to digital innovation"
+            }
+        ],
+        "specialties_detail": [
+            {
+                "name": "Differentiated lesson design",
+                "proficiency": 95
+            },
+            {
+                "name": "Inclusive classroom strategies",
+                "proficiency": 90
+            },
+            {
+                "name": "Assessment & reflective teaching",
+                "proficiency": 88
+            },
+            {
+                "name": "Learning technology integration",
+                "proficiency": 85
+            }
+        ],
         "experience": [
             {
                 "role": "Student Teacher",

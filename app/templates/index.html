@@ -3,7 +3,7 @@
 {% block content %}
 <header class="hero">
     <div class="container hero-grid hero-grid-wide">
-        <div class="hero-copy">
+        <div class="hero-copy" data-aos="fade-up">
             <p class="eyebrow">Professional Teaching Portfolio</p>
             <h1>{{ profile.name }}</h1>
             <p class="hero-subtitle">{{ profile.title }}</p>
@@ -13,7 +13,7 @@
                 <a href="{{ url_for('lessons') }}" class="btn btn-secondary">View lesson portfolio</a>
             </div>
         </div>
-        <div class="hero-image-card">
+        <div class="hero-image-card" data-aos="fade-left">
             <div class="hero-image-frame">
                 <div class="hero-avatar">
                     <span>Esona Mzalazala</span>
@@ -32,18 +32,36 @@
     </div>
 </header>
 
+<section class="section section-light">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-label">Impact</span>
+            <h2>Measurable reach and classroom leadership</h2>
+        </div>
+        <div class="impact-grid">
+            {% for stat in profile.impact_stats %}
+                <article class="impact-card" data-aos="zoom-in">
+                    <div class="impact-number">{{ stat.number }}</div>
+                    <h3>{{ stat.label }}</h3>
+                    <p>{{ stat.description }}</p>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
 <section id="about" class="section section-light">
     <div class="container">
-        <div class="section-header">
+        <div class="section-header" data-aos="fade-up">
             <span class="section-label">About</span>
             <h2>Teaching with creativity, structure, and measurable impact</h2>
         </div>
         <div class="grid two-columns gap-lg">
-            <div>
+            <div data-aos="fade-right">
                 <h3>Student-centered learning</h3>
                 <p>Focused on designing learning experiences that are inclusive, rigorous, and motivating. I blend emotional intelligence, classroom culture, and data-driven reflection so every student can thrive.</p>
             </div>
-            <div>
+            <div data-aos="fade-left">
                 <h3>Classroom innovation</h3>
                 <p>From interactive literacy projects to blended learning cycles, I craft lessons that foster curiosity, develop confidence, and support differentiated pathways to success.</p>
             </div>
@@ -53,15 +71,21 @@
 
 <section class="section section-accent">
     <div class="container">
-        <div class="section-header white">
+        <div class="section-header white" data-aos="fade-up">
             <span class="section-label">Skills</span>
             <h2>Core strengths for a modern classroom</h2>
         </div>
-        <div class="skills-grid">
-            {% for skill in profile.specialties %}
-                <article class="skill-card">
-                    <h3>{{ skill }}</h3>
-                </article>
+        <div class="skills-detail-grid" data-aos="fade-up">
+            {% for skill in profile.specialties_detail %}
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <h3>{{ skill.name }}</h3>
+                        <span class="skill-percent">{{ skill.proficiency }}%</span>
+                    </div>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar" data-width="{{ skill.proficiency }}" style="width: 0%"></div>
+                    </div>
+                </div>
             {% endfor %}
         </div>
     </div>
@@ -69,13 +93,13 @@
 
 <section class="section section-light">
     <div class="container">
-        <div class="section-header">
+        <div class="section-header" data-aos="fade-up">
             <span class="section-label">Experience</span>
             <h2>Classroom leadership and collaborative impact</h2>
         </div>
         <div class="timeline">
             {% for item in profile.experience %}
-                <div class="timeline-item">
+                <div class="timeline-item" data-aos="fade-up">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <p class="timeline-meta">{{ item.dates }}</p>
@@ -91,13 +115,13 @@
 
 <section class="section section-light">
     <div class="container">
-        <div class="section-header">
+        <div class="section-header" data-aos="fade-up">
             <span class="section-label">Projects</span>
             <h2>Designs that support learners, families, and teachers</h2>
         </div>
         <div class="project-grid project-grid-wide">
             {% for project in profile.projects %}
-                <article class="project-card card-flip">
+                <article class="project-card card-flip" data-aos="zoom-in">
                     <a href="{{ url_for('project_detail', slug=project.slug) }}" class="card-link">
                         <div class="project-card-inner">
                             <div class="project-card-front">
@@ -125,18 +149,18 @@
 
 <section class="section section-light">
     <div class="container">
-        <div class="section-header">
+        <div class="section-header" data-aos="fade-up">
             <span class="section-label">Video showcase</span>
             <h2>See classroom strategy and student engagement in action</h2>
         </div>
-        <div class="video-frame">
+        <div class="video-frame" data-aos="fade-up">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Esona Teaching Showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
 </section>
 
 <section id="contact" class="section section-light">
-    <div class="container contact-section">
+    <div class="container contact-section" data-aos="fade-up">
         <div class="contact-card">
             <div class="contact-copy">
                 <h2>Let’s bring great learning to life.</h2>
