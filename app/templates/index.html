@@ -1,5 +1,129 @@
 {% extends 'base.html' %}
 
+{% block intro %}
+<div class="intro-overlay">
+    <div class="intro-content">
+        <div class="intro-greeting">
+            <span class= "intro-eyebrow">Welcome</span>
+            <h2 class="intro-heading">Hi, I'm {{ profile.name }}</h2>
+            <p class="intro-subtext">Come take a seat — let's step into the classroom.</p>
+        </div>
+        <div class="intro-overlay-inner">
+            <svg viewBox="0 0 560 470" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated illustration of a teacher writing on a whiteboard while a student raises their hand">
+
+            <!-- wall + floor -->
+            <rect x="0" y="0" width="560" height="470" fill="#eaf0e6"/>
+            <rect x="0" y="360" width="560" height="110" fill="#d9c9ad"/>
+
+            <!-- window -->
+            <rect x="460" y="30" width="80" height="90" rx="4" fill="#cfe4de" stroke="#6b5744" stroke-width="4"/>
+            <line x1="500" y1="30" x2="500" y2="120" stroke="#6b5744" stroke-width="3"/>
+            <line x1="460" y1="75" x2="540" y2="75" stroke="#6b5744" stroke-width="3"/>
+
+            <!-- clock -->
+            <circle cx="495" cy="55" r="16" fill="#fff" stroke="#6b5744" stroke-width="2"/>
+            <line class="clock-hand" x1="495" y1="55" x2="495" y2="44" stroke="#2b3a55" stroke-width="2" stroke-linecap="round"/>
+            <line x1="495" y1="55" x2="502" y2="55" stroke="#2b3a55" stroke-width="1.5" stroke-linecap="round"/>
+
+            <!-- whiteboard -->
+            <rect x="70" y="60" width="330" height="180" rx="6" fill="#6b5744"/>
+            <rect x="80" y="70" width="310" height="160" rx="4" fill="#fdfdfb"/>
+
+            <!-- chalk tray -->
+            <rect x="80" y="228" width="310" height="8" fill="#c9c2b4"/>
+            <g class="dust">
+                <circle cx="150" cy="228" r="2.5" fill="#c9c2b4"/>
+                <circle cx="230" cy="228" r="2" fill="#c9c2b4"/>
+                <circle cx="300" cy="228" r="2.5" fill="#c9c2b4"/>
+            </g>
+
+            <!-- chalk writing -->
+            <g fill="none" stroke="#3d8c86" stroke-width="4" stroke-linecap="round">
+                <path class="chalk-line chalk-line-1" d="M100,105 h140" />
+                <path class="chalk-line chalk-line-2" d="M100,140 h100" />
+                <path class="chalk-line chalk-line-3" d="M100,175 h70" />
+            </g>
+
+            <!-- ===== TEACHER ===== -->
+            <g class="teacher-body">
+                <rect x="222" y="330" width="16" height="60" rx="6" fill="#2b3a55"/>
+                <rect x="250" y="330" width="16" height="60" rx="6" fill="#2b3a55"/>
+                <rect x="212" y="255" width="66" height="90" rx="18" fill="#2b3a55"/>
+                <rect x="270" y="265" width="14" height="60" rx="7" fill="#d9a066"/>
+                <g class="arm-write">
+                    <rect x="206" y="205" width="14" height="66" rx="7" fill="#d9a066" transform="rotate(20 213 238)"/>
+                    <circle cx="234" cy="210" r="6" fill="#6b5744"/>
+                </g>
+                <circle cx="245" cy="235" r="26" fill="#d9a066"/>
+                <path d="M219,225 a26,22 0 0 1 52,0 v-6 a26,20 0 0 0 -52,0 z" fill="#4a3527"/>
+                <g class="eyes">
+                    <circle cx="238" cy="234" r="2.4" fill="#2b3a55"/>
+                    <circle cx="253" cy="234" r="2.4" fill="#2b3a55"/>
+                </g>
+                <path d="M238,245 q7,6 14,0" fill="none" stroke="#2b3a55" stroke-width="2" stroke-linecap="round"/>
+            </g>
+
+            <!-- ===== STUDENT DESKS ===== -->
+            <g class="student-1">
+                <rect x="70" y="365" width="70" height="10" rx="3" fill="#6b5744"/>
+                <rect x="75" y="375" width="8" height="35" fill="#6b5744"/>
+                <rect x="127" y="375" width="8" height="35" fill="#6b5744"/>
+                <rect x="82" y="330" width="46" height="42" rx="12" fill="#d1495b"/>
+                <g class="hand-raise">
+                    <rect x="112" y="300" width="10" height="40" rx="5" fill="#8c5a3c"/>
+                    <circle cx="117" cy="298" r="6" fill="#8c5a3c"/>
+                </g>
+                <rect x="72" y="300" width="10" height="34" rx="5" fill="#8c5a3c"/>
+                <circle cx="105" cy="315" r="20" fill="#8c5a3c"/>
+                <path d="M85,308 a20,16 0 0 1 40,0 v-5 a20,14 0 0 0 -40,0 z" fill="#20140d"/>
+                <g class="eyes">
+                    <circle cx="99" cy="314" r="2" fill="#2b3a55"/>
+                    <circle cx="111" cy="314" r="2" fill="#2b3a55"/>
+                </g>
+                <path d="M99,322 q6,5 12,0" fill="none" stroke="#2b3a55" stroke-width="1.6" stroke-linecap="round"/>
+            </g>
+
+            <g class="student-2">
+                <rect x="180" y="375" width="70" height="10" rx="3" fill="#6b5744"/>
+                <rect x="185" y="385" width="8" height="35" fill="#6b5744"/>
+                <rect x="237" y="385" width="8" height="35" fill="#6b5744"/>
+                <rect x="192" y="340" width="46" height="42" rx="12" fill="#3d8c86"/>
+                <rect x="182" y="310" width="10" height="34" rx="5" fill="#d9a066"/>
+                <rect x="222" y="310" width="10" height="34" rx="5" fill="#d9a066"/>
+                <circle cx="215" cy="325" r="20" fill="#d9a066"/>
+                <path d="M195,318 a20,16 0 0 1 40,0 v-5 a20,14 0 0 0 -40,0 z" fill="#6b4a2f"/>
+                <g class="eyes">
+                    <circle cx="209" cy="324" r="2" fill="#2b3a55"/>
+                    <circle cx="221" cy="324" r="2" fill="#2b3a55"/>
+                </g>
+                <path d="M209,332 q6,5 12,0" fill="none" stroke="#2b3a55" stroke-width="1.6" stroke-linecap="round"/>
+            </g>
+
+            <g class="student-3">
+                <rect x="300" y="378" width="70" height="10" rx="3" fill="#6b5744"/>
+                <rect x="305" y="388" width="8" height="35" fill="#6b5744"/>
+                <rect x="357" y="388" width="8" height="35" fill="#6b5744"/>
+                <rect x="312" y="343" width="46" height="42" rx="12" fill="#e3b23c"/>
+                <rect x="302" y="313" width="10" height="34" rx="5" fill="#8c5a3c"/>
+                <rect x="342" y="313" width="10" height="34" rx="5" fill="#8c5a3c"/>
+                <circle cx="335" cy="328" r="20" fill="#8c5a3c"/>
+                <path d="M315,321 a20,16 0 0 1 40,0 v-5 a20,14 0 0 0 -40,0 z" fill="#1c1c1c"/>
+                <g class="eyes">
+                    <circle cx="329" cy="327" r="2" fill="#2b3a55"/>
+                    <circle cx="341" cy="327" r="2" fill="#2b3a55"/>
+                </g>
+                <path d="M329,335 q6,5 12,0" fill="none" stroke="#2b3a55" stroke-width="1.6" stroke-linecap="round"/>
+            </g>
+
+            <!-- apple on desk -->
+            <circle cx="380" cy="360" r="8" fill="#e3b23c"/>
+            <path d="M380,352 q2,-6 6,-4" fill="none" stroke="#5a7a3a" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
 {% block content %}
 <header class="hero">
     <div class="container hero-grid hero-grid-wide">
@@ -15,7 +139,7 @@
         </div>
         <div class="hero-image-card" data-aos="fade-left">
             <div class="hero-image-frame teacher-illustration">
-                <img src="{{ url_for('static', filename='images/teacher-cartoon.svg') }}" alt="Esona - Teacher in classroom" class="teacher-cartoon">
+                <img src="{{ url_for('static', filename='images/Esona.jpeg') }}" alt="Esona - Professional photo" class="teacher-cartoon">
             </div>
         </div>
     </div>

@@ -850,3 +850,195 @@ textarea:focus {
         max-width: 240px;
     }
 }
+/* ============ FULL-PAGE INTRO OVERLAY ============ */
+/* Add this whole block to static/css/style.css.
+   If you already added the earlier "classroom-intro" block, delete
+   that one first — this replaces it. */
+
+/* The part of the page that gets blurred while the intro plays.
+   Sits INSIDE .page-wrap in base.html, so the overlay itself
+   (a sibling, outside this wrapper) never gets blurred. */
+.page-wrap {
+    filter: blur(14px);
+    transform: scale(1.02); /* hides soft edges the blur creates */
+    pointer-events: none;
+    animation: pageUnblur 1.1s ease forwards;
+    animation-delay: 8s;
+}
+@keyframes pageUnblur {
+    to {
+        filter: blur(0);
+        transform: scale(1);
+        pointer-events: auto;
+    }
+}
+
+/* Full-screen overlay, centered, sits above everything */
+.intro-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eaf0e6;
+    animation: overlayFadeOut 1.1s ease forwards;
+    animation-delay: 8s;
+}
+@keyframes overlayFadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+}
+
+.intro-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 26px;
+    padding: 24px;
+    max-width: 900px;
+}
+
+.intro-greeting {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(14px);
+    animation: introTextIn 0.9s ease forwards;
+    animation-delay: 0.15s;
+}
+@keyframes introTextIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.intro-eyebrow {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #3d8c86;
+    margin-bottom: 10px;
+}
+.intro-heading {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #2b3a55;
+    margin: 0 0 8px;
+}
+.intro-subtext {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #5b6577;
+    margin: 0;
+}
+
+.intro-overlay-inner {
+    width: min(820px, 92vw);
+    aspect-ratio: 560 / 470;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    transform: scale(0.97);
+    animation: introSceneIn 0.9s ease forwards;
+    animation-delay: 0.4s;
+}
+@keyframes introSceneIn {
+    to { opacity: 1; transform: scale(1); }
+}
+.intro-overlay-inner svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 560px) {
+    .intro-content { gap: 18px; padding: 20px; }
+    .intro-subtext { font-size: 14px; }
+}
+
+/* Lock the overlay to light colors no matter what theme is active.
+   All fills inside the SVG are hardcoded hex, not CSS variables, so
+   they can't be swapped by a dark-mode rule — this just also protects
+   the overlay's own background. */
+[data-theme="dark"] .intro-overlay {
+    background: #eaf0e6 !important;
+    filter: none !important;
+}
+
+/* ===== Individual animation keyframes used inside the SVG ===== */
+.arm-write { transform-origin: 232px 210px; animation: writeArm 2.6s ease-in-out infinite; }
+@keyframes writeArm {
+    0%, 100% { transform: rotate(0deg); }
+    35% { transform: rotate(-12deg); }
+    65% { transform: rotate(6deg); }
+}
+
+.chalk-line { stroke-dasharray: 140; stroke-dashoffset: 140; }
+.chalk-line-1 { animation: drawChalk 5.5s ease-in-out infinite; }
+.chalk-line-2 { stroke-dasharray: 100; stroke-dashoffset: 100; animation: drawChalk2 5.5s ease-in-out infinite; }
+.chalk-line-3 { stroke-dasharray: 70; stroke-dashoffset: 70; animation: drawChalk3 5.5s ease-in-out infinite; }
+@keyframes drawChalk {
+    0% { stroke-dashoffset: 140; }
+    18% { stroke-dashoffset: 0; }
+    85% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -140; }
+}
+@keyframes drawChalk2 {
+    0%, 20% { stroke-dashoffset: 100; }
+    40% { stroke-dashoffset: 0; }
+    85% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -100; }
+}
+@keyframes drawChalk3 {
+    0%, 42% { stroke-dashoffset: 70; }
+    58% { stroke-dashoffset: 0; }
+    85% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -70; }
+}
+
+.teacher-body { transform-origin: 240px 300px; animation: sway 4s ease-in-out infinite; }
+@keyframes sway { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(1.2deg); } }
+
+.hand-raise { transform-origin: 118px 330px; animation: raiseHand 4.5s ease-in-out infinite; }
+@keyframes raiseHand {
+    0%, 15% { transform: rotate(0deg); }
+    28% { transform: rotate(-150deg); }
+    75% { transform: rotate(-150deg); }
+    90%, 100% { transform: rotate(0deg); }
+}
+
+.eyes { animation: blink 5s ease-in-out infinite; transform-origin: center; }
+.student-2 .eyes { animation-delay: 1.1s; }
+.student-3 .eyes { animation-delay: 2.3s; }
+@keyframes blink {
+    0%, 92%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+}
+
+.dust circle { animation: floatDust 3.5s ease-in infinite; opacity: 0; }
+.dust circle:nth-child(1) { animation-delay: 0s; }
+.dust circle:nth-child(2) { animation-delay: 1.1s; }
+.dust circle:nth-child(3) { animation-delay: 2.2s; }
+@keyframes floatDust {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    15% { opacity: 0.7; }
+    100% { transform: translateY(-46px) translateX(6px); opacity: 0; }
+}
+
+.clock-hand { transform-origin: 495px 55px; animation: tick 6s steps(12) infinite; }
+@keyframes tick { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+    .intro-overlay { display: none; }
+    .page-wrap { filter: none; transform: none; pointer-events: auto; animation: none; }
+    .intro-overlay * { animation: none !important; }
+    .intro-greeting, .intro-overlay-inner { opacity: 1; transform: none; }
+}

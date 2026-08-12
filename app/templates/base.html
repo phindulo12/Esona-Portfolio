@@ -11,37 +11,41 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 <body>
-    <header class="site-header">
-        <div class="container header-inner">
-            <div class="brand">{{ profile.name }}</div>
-            <nav class="site-nav">
-                <a href="{{ url_for('home') }}">Home</a>
-                <a href="{{ url_for('lessons') }}">Lesson portfolio</a>
-                <a href="{{ url_for('home') }}#contact">Contact</a>
-            </nav>
-        </div>
-    </header>
+    {% block intro %}{% endblock %}
 
-    <main>
-        <div class="container">
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <div class="flash-messages">
-                        {% for msg in messages %}
-                            <div class="alert">{{ msg }}</div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            {% endwith %}
-        </div>
-        {% block content %}{% endblock %}
-    </main>
+    <div class="page-wrap">
+        <header class="site-header">
+            <div class="container header-inner">
+                <div class="brand">{{ profile.name }}</div>
+                <nav class="site-nav">
+                    <a href="{{ url_for('home') }}">Home</a>
+                    <a href="{{ url_for('lessons') }}">Lesson portfolio</a>
+                    <a href="{{ url_for('home') }}#contact">Contact</a>
+                </nav>
+            </div>
+        </header>
 
-    <footer class="footer">
-        <div class="container footer-content">
-            <p>&copy; 2025 {{ profile.name }} | BSc Teaching Graduate</p>
-        </div>
-    </footer>
+        <main>
+            <div class="container">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for msg in messages %}
+                                <div class="alert">{{ msg }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="footer">
+            <div class="container footer-content">
+                <p>&copy; 2025 {{ profile.name }} | BSc Teaching Graduate</p>
+            </div>
+        </footer>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="{{ url_for('static', filename='js/animations.js') }}"></script>
