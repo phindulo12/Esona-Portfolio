@@ -14,19 +14,8 @@
             </div>
         </div>
         <div class="hero-image-card" data-aos="fade-left">
-            <div class="hero-image-frame">
-                <div class="hero-avatar">
-                    <span>Esona Mzalazala</span>
-                </div>
-            </div>
-            <div class="hero-text-card">
-                <h2>{{ profile.name }}</h2>
-                <p>{{ profile.title }}</p>
-                <ul class="profile-details">
-                    {% for paragraph in profile.bio %}
-                        <li>{{ paragraph }}</li>
-                    {% endfor %}
-                </ul>
+            <div class="hero-image-frame teacher-illustration">
+                <img src="{{ url_for('static', filename='images/teacher-cartoon.svg') }}" alt="Esona - Teacher in classroom" class="teacher-cartoon">
             </div>
         </div>
     </div>
