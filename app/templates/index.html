@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="hero">
+    <div class="container hero-grid">
+        <div class="hero-copy">
+            <p class="eyebrow">Professional Teaching Portfolio</p>
+            <h1>{{ profile.name }}</h1>
+            <p class="hero-subtitle">{{ profile.title }}</p>
+            <p class="hero-description">{{ profile.headline }}</p>
+            <div class="hero-actions">
+                <a href="#about" class="btn btn-primary">Explore my approach</a>
+                <a href="{{ url_for('lessons') }}" class="btn btn-secondary">View lesson portfolio</a>
+            </div>
+        </div>
+        <div class="hero-card">
+            <div class="profile-card">
+                <div class="profile-avatar"></div>
+                <h2>{{ profile.name }}</h2>
+                <p>{{ profile.title }}</p>
+                <ul class="profile-details">
+                    {% for paragraph in profile.bio %}
+                        <li>{{ paragraph }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="about" class="section section-light">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">About</span>
+            <h2>Teaching with creativity, structure, and measurable impact</h2>
+        </div>
+        <div class="grid two-columns gap-lg">
+            <div>
+                <h3>Student-centered learning</h3>
+                <p>Focused on designing learning experiences that are inclusive, rigorous, and motivating. I blend emotional intelligence, classroom culture, and data-driven reflection so every student can thrive.</p>
+            </div>
+            <div>
+                <h3>Classroom innovation</h3>
+                <p>From interactive literacy projects to blended learning cycles, I craft lessons that foster curiosity, develop confidence, and support differentiated pathways to success.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-accent">
+    <div class="container">
+        <div class="section-header white">
+            <span class="section-label">Skills</span>
+            <h2>Core strengths for a modern classroom</h2>
+        </div>
+        <div class="skills-grid">
+            {% for skill in profile.specialties %}
+                <article class="skill-card">
+                    <h3>{{ skill }}</h3>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section section-light">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">Experience</span>
+            <h2>Classroom leadership and collaborative impact</h2>
+        </div>
+        <div class="timeline">
+            {% for item in profile.experience %}
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-meta">{{ item.dates }}</p>
+                        <h3>{{ item.role }}</h3>
+                        <p class="timeline-subtitle">{{ item.organization }}</p>
+                        <p>{{ item.details }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section section-light">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">Projects</span>
+            <h2>Designs that support learners, families, and teachers</h2>
+        </div>
+        <div class="project-grid">
+            {% for project in profile.projects %}
+                <article class="project-card card-flip">
+                    <a href="{{ url_for('project_detail', slug=project.slug) }}" class="card-link">
+                        <div class="project-card-inner">
+                            <div class="project-card-front">
+                                <span class="section-label">Project</span>
+                                <h3>{{ project.name }}</h3>
+                                <p>{{ project.description }}</p>
+                                <p class="card-cta">Hover to explore</p>
+                            </div>
+                            <div class="project-card-back">
+                                <h3>Highlights</h3>
+                                <ul>
+                                    {% for highlight in project.highlights %}
+                                        <li>{{ highlight }}</li>
+                                    {% endfor %}
+                                </ul>
+                                <p class="card-click">Click for the full case study</p>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="section section-light">
+    <div class="container contact-section">
+        <div class="contact-card">
+            <div class="contact-copy">
+                <h2>Let’s bring great learning to life.</h2>
+                <p>Ready to collaborate on student-centered instruction, inclusive curriculum design, and data-informed teaching practice.</p>
+                <div class="contact-list">
+                    <div>
+                        <span>Email</span>
+                        <a href="mailto:{{ profile.contact.email }}">{{ profile.contact.email }}</a>
+                    </div>
+                    <div>
+                        <span>LinkedIn</span>
+                        <a href="https://{{ profile.contact.linkedin }}" target="_blank">{{ profile.contact.linkedin }}</a>
+                    </div>
+                    <div>
+                        <span>Portfolio</span>
+                        <a href="https://{{ profile.contact.portfolio }}" target="_blank">{{ profile.contact.portfolio }}</a>
+                    </div>
+                </div>
+            </div>
+            <form action="{{ url_for('send_message') }}" method="post" class="contact-form">
+                <div class="form-grid">
+                    <label>
+                        <span>Name</span>
+                        <input type="text" name="name" placeholder="Your full name" required />
+                    </label>
+                    <label>
+                        <span>Email</span>
+                        <input type="email" name="email" placeholder="your.email@example.com" required />
+                    </label>
+                    <label class="full-width">
+                        <span>Subject</span>
+                        <input type="text" name="subject" placeholder="Reason for reaching out" />
+                    </label>
+                    <label class="full-width">
+                        <span>Message</span>
+                        <textarea name="message" rows="6" placeholder="Tell me a little about your opportunity" required></textarea>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Send message</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Lesson Portfolio · {{ profile.name }}{% endblock %}
+
+{% block content %}
+<section class="section section-light">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">Lesson portfolio</span>
+            <h2>Creative learning experiences designed for meaningful student growth</h2>
+        </div>
+        <div class="lesson-grid">
+            {% for lesson in lessons %}
+                <article class="lesson-card">
+                    <h3>{{ lesson.title }}</h3>
+                    <p>{{ lesson.description }}</p>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section section-accent">
+    <div class="container">
+        <div class="section-header white">
+            <span class="section-label">Testimonials</span>
+            <h2>Feedback that affirms an inspiring classroom presence</h2>
+        </div>
+        <div class="testimonial-grid">
+            {% for item in testimonials %}
+                <article class="testimonial-card">
+                    <p>“{{ item.quote }}”</p>
+                    <p class="testimonial-author">{{ item.author }}</p>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
