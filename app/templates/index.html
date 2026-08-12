@@ -2,7 +2,7 @@
 
 {% block content %}
 <header class="hero">
-    <div class="container hero-grid">
+    <div class="container hero-grid hero-grid-wide">
         <div class="hero-copy">
             <p class="eyebrow">Professional Teaching Portfolio</p>
             <h1>{{ profile.name }}</h1>
@@ -13,9 +13,13 @@
                 <a href="{{ url_for('lessons') }}" class="btn btn-secondary">View lesson portfolio</a>
             </div>
         </div>
-        <div class="hero-card">
-            <div class="profile-card">
-                <div class="profile-avatar"></div>
+        <div class="hero-image-card">
+            <div class="hero-image-frame">
+                <div class="hero-avatar">
+                    <span>Esona Mzalazala</span>
+                </div>
+            </div>
+            <div class="hero-text-card">
                 <h2>{{ profile.name }}</h2>
                 <p>{{ profile.title }}</p>
                 <ul class="profile-details">
@@ -91,7 +95,7 @@
             <span class="section-label">Projects</span>
             <h2>Designs that support learners, families, and teachers</h2>
         </div>
-        <div class="project-grid">
+        <div class="project-grid project-grid-wide">
             {% for project in profile.projects %}
                 <article class="project-card card-flip">
                     <a href="{{ url_for('project_detail', slug=project.slug) }}" class="card-link">
@@ -115,6 +119,18 @@
                     </a>
                 </article>
             {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section section-light">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">Video showcase</span>
+            <h2>See classroom strategy and student engagement in action</h2>
+        </div>
+        <div class="video-frame">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Esona Teaching Showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
 </section>

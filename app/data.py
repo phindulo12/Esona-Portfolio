@@ -1,10 +1,3 @@
-import os
-import smtplib
-from email.message import EmailMessage
-from flask import render_template, request, redirect, url_for, flash, abort
-from app import app
-
-
 def get_profile():
     return {
         "name": "Esona Mzalazala",
@@ -13,7 +6,7 @@ def get_profile():
         "bio": [
             "Recent BSc Teaching graduate with strong experience in curriculum planning, classroom culture, and student-centered instruction.",
             "I design engaging learning experiences that honor diversity, encourage curiosity, and build meaningful academic progress.",
-            "Focused on blending evidence-based pedagogy with digital tools to support every student's growth." 
+            "Focused on blending evidence-based pedagogy with digital tools to support every student's growth."
         ],
         "specialties": [
             "Differentiated lesson design",
@@ -64,6 +57,28 @@ def get_profile():
                     "Improved engagement with consistent family communication.",
                     "Supported data-informed planning through formative tracking."
                 ]
+            },
+            {
+                "slug": "adaptive-reading-lab",
+                "name": "Adaptive Reading Lab",
+                "description": "Built a reading lab experience that adjusted reading levels and scaffolded comprehension for each learner.",
+                "detail": "The Adaptive Reading Lab combined small-group coaching, leveled texts, and student-led discussions that prioritized fluency, meaning-making, and confidence.",
+                "highlights": [
+                    "Scaffolded instruction through targeted small-group rotations.",
+                    "Used student data to drive next-step reading goals.",
+                    "Encouraged peer collaboration with guided discussion cycles."
+                ]
+            },
+            {
+                "slug": "community-learning-showcase",
+                "name": "Community Learning Showcase",
+                "description": "Created a showcase event where learners shared projects, reflections, and family connections with confidence.",
+                "detail": "This project cultivated learner agency by inviting students to present work, reflect on growth, and celebrate learning with families and community partners.",
+                "highlights": [
+                    "Designed a strengths-based presentation protocol.",
+                    "Centered student voice in exhibition planning.",
+                    "Promoted family engagement through meaningful celebration."
+                ]
             }
         ],
         "contact": {
@@ -107,71 +122,3 @@ def get_testimonials():
 def get_project(slug):
     profile = get_profile()
     return next((project for project in profile["projects"] if project["slug"] == slug), None)
-
-
-@app.route("/project/<slug>")
-def project_detail(slug):
-    profile = get_profile()
-    project = get_project(slug)
-    if not project:
-        abort(404)
-    return render_template("project_detail.html", profile=profile, project=project)
-
-
-def send_contact_email(name, email, subject, message_body):
-    smtp_server = os.getenv("SMTP_SERVER")
-    smtp_port = int(os.getenv("SMTP_PORT", "587"))
-    sender = os.getenv("EMAIL_SENDER")
-    password = os.getenv("EMAIL_PASSWORD")
-    recipient = os.getenv("EMAIL_RECEIVER", sender)
-
-    if not smtp_server or not sender or not password:
-        raise RuntimeError("SMTP service is not configured.")
-
-    email_message = EmailMessage()
-    email_message["Subject"] = f"Portfolio Contact from {name}: {subject}"
-    email_message["From"] = sender
-    email_message["To"] = recipient
-    email_message.set_content(
-        f"Name: {name}\nEmail: {email}\nSubject: {subject}\n\nMessage:\n{message_body}\n"
-    )
-
-    with smtplib.SMTP(smtp_server, smtp_port) as server:
-        server.starttls()
-        server.login(sender, password)
-        server.send_message(email_message)
-
-
-@app.route("/")
-def home():
-    profile = get_profile()
-    return render_template("index.html", profile=profile)
-
-
-@app.route("/lessons")
-def lessons():
-    profile = get_profile()
-    lessons = get_lessons()
-    testimonials = get_testimonials()
-    return render_template("lessons.html", profile=profile, lessons=lessons, testimonials=testimonials)
-
-
-@app.route("/send-message", methods=["POST"])
-def send_message():
-    name = request.form.get("name", "").strip()
-    email = request.form.get("email", "").strip()
-    subject = request.form.get("subject", "Portfolio inquiry").strip()
-    message_body = request.form.get("message", "").strip()
-
-    if not name or not email or not message_body:
-        flash("Please complete all fields before sending your message.")
-        return redirect(url_for("home"))
-
-    try:
-        send_contact_email(name, email, subject, message_body)
-        flash("Your message was sent successfully. I’ll follow up soon.")
-    except Exception as exc:
-        app.logger.error("Contact form error: %s", exc)
-        flash("Your message was received, but email delivery is not configured. Please contact directly if the issue persists.")
-
-    return redirect(url_for("home"))
