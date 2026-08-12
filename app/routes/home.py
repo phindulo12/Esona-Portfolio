@@ -23,7 +23,7 @@ def send_message():
 
     try:
         send_contact_email(name, email, subject, message_body)
-        flash("Your message was sent successfully. I’ll follow up soon.")
+        flash("Your message was sent successfully. I'll follow up soon.")
     except Exception as exc:
         app.logger.error("Contact form error: %s", exc)
         flash("Your message was received, but email delivery is not configured. Please contact directly if the issue persists.")
